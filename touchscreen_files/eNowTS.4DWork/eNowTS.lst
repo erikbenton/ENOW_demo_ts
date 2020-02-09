@@ -5231,17 +5231,17 @@ file C:\Users\EBenton\Documents\ENOW_demo_ts\touchscreen_files\eNowTS.4DWork\eNo
 
 005220  000008  #inherit "eNowTSConst.inc"
 005221  000008  #inherit "eNowTSConst.inc"
-005222  000001  // File generated 2/9/2020 9:32:37 AM
+005222  000001  // File generated 2/9/2020 10:57:29 AM
 005223  000002  // Warning! This is a generated file, any manual changes will be
 005224  000003  // lost during the next generation.
 005225  000004        
 005226  000005  // object indexes into ImageControl
 005227  000006  #CONST
-005228  000007  #END
-005229  000008        
-005230  000009  #IFNOT EXISTS NOGLOBALS
-005231  000010  var hndl ;
-005232  000011  #ENDIF
+005228  000012  #END
+005229  000013        
+005230  000014  #IFNOT EXISTS NOGLOBALS
+005231  000015  var hndl ;
+005232  000016  #ENDIF
 005233  000009        
 005234  000010  // ##################
 005235  000011  // Constants
@@ -6267,6 +6267,7 @@ IMAGE_TAG2                            13  0x0000000d (const dword)  (not used)
 IMAGE_WIDTH                            4  0x00000004 (const dword)  (not used)
 IMAGE_XPOS                             2  0x00000002 (const dword)  (not used)
 IMAGE_YPOS                             3  0x00000003 (const dword)  (not used)
+iMainHub_btn                           0  0x00000000 (const ??? 0)  (not used)
 img_ClearAttributes                 -383  0xfffffe81 (PmmC func) args[3] r=1  (not used)
 IMG_COUNT                              0  0x00000000 (const dword)  (not used)
 IMG_CURRENT_FRAME                     89  0x00000059 (const dword)  (not used)
@@ -6309,6 +6310,10 @@ iswhite                              -44  0xffffffd4 (PmmC func) args[1] r=1  (n
 isxdigit                             -37  0xffffffdb (PmmC func) args[1] r=1  (not used)
 ITALIC                                32  0x00000020 (const dword)  (not used)
 iterator                            -404  0xfffffe6c (PmmC func) args[1] r=0  (not used)
+iToggle1_btn                           1  0x00000001 (const ??? 0)  (not used)
+iToggle2_btn                           2  0x00000002 (const ??? 0)  (not used)
+iToggle3_btn                           3  0x00000003 (const ??? 0)  (not used)
+iToggle4_btn                           4  0x00000004 (const ??? 0)  (not used)
 IVORY                              65534  0x0000fffe (const dword)  (not used)
 KHAKI                              63281  0x0000f731 (const dword)  (not used)
 LANDSCAPE                              0  0x00000000 (const dword)  (usage 3)
