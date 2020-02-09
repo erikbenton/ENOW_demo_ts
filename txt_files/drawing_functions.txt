@@ -1,0 +1,34 @@
+// ##################
+// DRAWING
+// ##################
+
+// === Logo Screen ===
+
+func draw_logo_screen()
+
+  gfx_BGcolour(WHITE);
+  gfx_Cls();
+
+endfunc
+
+// === Overall Form ===
+
+
+
+// === Helpers ===
+
+func reset_font(var x, var y)
+  txt_Set(TEXT_HIGHLIGHT, 0xFFFF);
+  txt_Set(TEXT_COLOUR, BLACK);
+  txt_Width(2);
+  txt_Height(2);
+  gfx_MoveTo(x, y);
+endfunc
+
+func blue_background_font(var x, var y)
+  txt_Set(TEXT_HIGHLIGHT, 0x8D9C);
+  txt_Set(TEXT_COLOUR, BLACK);
+  txt_Width(2);
+  txt_Height(2);
+  gfx_MoveTo(x, y);
+endfunc

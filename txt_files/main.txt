@@ -1,0 +1,48 @@
+// ##################
+// Main
+// ##################
+
+func main()
+
+  // Mount the drive
+  putstr("Mounting...\n");
+  if (!(file_Mount()))
+    while(!(file_Mount()))
+      putstr("Drive not mounted...");
+      pause(200);
+      gfx_Cls();
+      pause(200);
+    wend
+  endif
+
+  // Get file handle
+  hndl := file_LoadImageControl("eNowTS.dat", "eNowTS.gci", 1);
+  
+  // Basic initialization stuff
+  gfx_Set(SCREEN_MODE, LANDSCAPE);
+  touch_Set(TOUCH_ENABLE);
+  setup_comms();
+
+  // Draw the logo screen then the overall screen
+  draw_logo_screen();
+  pause(1500);
+  draw_overall_form();
+
+  // Enter the forever loop
+  repeat
+
+    // Send Commands
+    
+    // Read Commands
+    // process_input();
+
+    // Update the view
+
+    // Check for user input
+    check_press();
+
+    // React to user input
+
+  forever
+
+endfunc

@@ -1,0 +1,59 @@
+// ##################
+// Input/Output
+// ##################
+
+// === Initialize ===
+
+func setup_comms()
+
+    com1_Init(rx_buffer, BUF_SIZE, 0);
+    com_SetBaud(COM1, BAUD);
+    COM1_TX_pin(PA4);
+    COM1_RX_pin(PA5);
+
+endfunc
+
+// === Input ===
+
+// Handles input messages
+func process_input()
+
+    var tmpByte;
+    var dataByteCount := 0x0F;
+    var temp_vals[15];
+    var shelf_number;
+    var mod_number;
+    var i;
+
+    if(com1_Count() > dataByteCount)
+        
+        // Read in the first byte
+        // Should be START BYTE (0xAA)
+        tmpByte := serin1();
+
+        // Looking for the start of a message so...
+        // While tmpByte isn't the Start Byte
+        while(tmpByte != START_BYT)
+
+            // If there isn't enough data
+            // in the buffer for a full message
+            if(com1_Count() < dataByteCount)
+                return; // Leave function
+            endif
+
+            // Read in the next byte
+            tmpByte := serin1();
+
+        wend
+
+        // Give it  5msec to breath
+        pause(5);
+
+        // Read in vals from buffer into temp array
+        for(i := 0; i < dataByteCount; i++)
+            temp_vals[i] := serin1();
+        next
+    endif
+endfunc
+
+// === Output ===
