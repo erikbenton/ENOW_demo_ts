@@ -13,7 +13,9 @@ endfunc
 
 // === Overall Form ===
 
+func draw_overall_form()
 
+endfunc
 
 // === Helpers ===
 

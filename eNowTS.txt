@@ -1,0 +1,239 @@
+// ##################
+// Headers
+// ##################
+
+#platform "Gen4-uLCD-70DT"
+#inherit "4DGL_16bitColours.fnc"
+#inherit "VisualConst.inc"
+#inherit "eNowTSConst.inc"
+
+// ##################
+// Constants
+// ##################
+
+// Generic
+#constant BTN_UP        0
+#constant BTN_DOWN      1
+#constant ACTIVE        1
+#constant INACTIVE      0
+#constant TRUE          1
+#constant FALSE         0
+#constant OFFLINE       1
+#constant ONLINE        0
+#constant START_BYT     0x18
+#constant BUF_SIZE      256
+#constant BAUD          20000
+
+// Colors
+#constant BACKGROUND_COLOR  0xDF5F
+#constant LED_GOOD          LIMEGREEN
+#constant LED_IDLE          0x34DF
+#constant LED_BAD           RED
+#constant RB_CHKD           BLACK
+#constant RB_UNCHKD         0xD699
+
+// Forms
+#constant OVERVIEW_FORM 0
+
+// Indices
+
+// ##################
+// Structures
+// ##################
+
+// ##################
+// Variables
+// ##################
+
+// Initialize to the overview screen
+var current_form := OVERVIEW_FORM;
+var rx_buffer[BUF_SIZE];
+
+// ##################
+// Main
+// ##################
+
+func main()
+
+  // Mount the drive
+  putstr("Mounting...\n");
+  if (!(file_Mount()))
+    while(!(file_Mount()))
+      putstr("Drive not mounted...");
+      pause(200);
+      gfx_Cls();
+      pause(200);
+    wend
+  endif
+
+  // Get file handle
+  hndl := file_LoadImageControl("eNowTS.dat", "eNowTS.gci", 1);
+  
+  // Basic initialization stuff
+  gfx_Set(SCREEN_MODE, LANDSCAPE);
+  touch_Set(TOUCH_ENABLE);
+  setup_comms();
+
+  // Draw the logo screen then the overall screen
+  draw_logo_screen();
+  pause(1500);
+  draw_overall_form();
+
+  // Enter the forever loop
+  repeat
+
+    // Send Commands
+    
+    // Read Commands
+    // process_input();
+
+    // Update the view
+
+    // Check for user input
+    check_press();
+
+    // React to user input
+
+  forever
+
+endfunc
+
+// ##################
+// DRAWING
+// ##################
+
+// === Logo Screen ===
+
+func draw_logo_screen()
+
+  gfx_BGcolour(WHITE);
+  gfx_Cls();
+
+endfunc
+
+// === Overall Form ===
+
+func draw_overall_form()
+
+endfunc
+
+// === Helpers ===
+
+func reset_font(var x, var y)
+  txt_Set(TEXT_HIGHLIGHT, 0xFFFF);
+  txt_Set(TEXT_COLOUR, BLACK);
+  txt_Width(2);
+  txt_Height(2);
+  gfx_MoveTo(x, y);
+endfunc
+
+func blue_background_font(var x, var y)
+  txt_Set(TEXT_HIGHLIGHT, 0x8D9C);
+  txt_Set(TEXT_COLOUR, BLACK);
+  txt_Width(2);
+  txt_Height(2);
+  gfx_MoveTo(x, y);
+endfunc
+
+// ##################
+// Math
+// ##################
+
+// ##################
+// Get/Set
+// ##################
+
+
+// ##################
+// Input/Output
+// ##################
+
+// === Initialize ===
+
+func setup_comms()
+
+    com1_Init(rx_buffer, BUF_SIZE, 0);
+    com_SetBaud(COM1, BAUD);
+    COM1_TX_pin(PA4);
+    COM1_RX_pin(PA5);
+
+endfunc
+
+// === Input ===
+
+// Handles input messages
+func process_input()
+
+    var tmpByte;
+    var dataByteCount := 0x0F;
+    var temp_vals[15];
+    var shelf_number;
+    var mod_number;
+    var i;
+
+    if(com1_Count() > dataByteCount)
+        
+        // Read in the first byte
+        // Should be START BYTE (0xAA)
+        tmpByte := serin1();
+
+        // Looking for the start of a message so...
+        // While tmpByte isn't the Start Byte
+        while(tmpByte != START_BYT)
+
+            // If there isn't enough data
+            // in the buffer for a full message
+            if(com1_Count() < dataByteCount)
+                return; // Leave function
+            endif
+
+            // Read in the next byte
+            tmpByte := serin1();
+
+        wend
+
+        // Give it  5msec to breath
+        pause(5);
+
+        // Read in vals from buffer into temp array
+        for(i := 0; i < dataByteCount; i++)
+            temp_vals[i] := serin1();
+        next
+    endif
+endfunc
+
+// === Output ===
+
+
+// ##################
+// Presses
+// ##################
+
+func check_press()
+
+  var touch_state;
+  touch_state := touch_Get(TOUCH_STATUS);
+
+  if(touch_state == TOUCH_RELEASED)
+    
+    // Get the touched image and location
+    var touched_image, x_touch, y_touch;
+    touched_image := img_Touched(hndl, -1);
+    x_touch := touch_Get(TOUCH_GETX);
+    y_touch := touch_Get(TOUCH_GETY);
+
+    // If we are looking at the overview screen
+    if(current_form == OVERVIEW_FORM)
+
+    endif
+
+  endif
+
+endfunc
+
+func disable_all_inputs()
+
+  img_SetAttributes(hndl, -1, I_TOUCH_DISABLE);
+
+endfunc
+

@@ -1,0 +1,25 @@
+skipped: 9     disable_all_inputs ----
+linked : 8     check_press 00003F
+ stmt:Offset  stmt:offset  stmt:offset  stmt:offset  stmt:offset  stmt:offset  stmt:offset  stmt:offset
+  215:00003f   217:00004a   221:000052   222:000060   223:00006b   226:000076 
+
+skipped: 7     process_input ----
+linked : 6     setup_comms 00007F
+ stmt:Offset  stmt:offset  stmt:offset  stmt:offset  stmt:offset  stmt:offset  stmt:offset  stmt:offset
+  155:00007f   156:00008c   157:000098   158:0000a0 
+
+skipped: 5     blue_background_font ----
+skipped: 4     reset_font ----
+linked : 3     draw_overall_form 0000A9
+linked : 2     draw_logo_screen 0000AA
+ stmt:Offset  stmt:offset  stmt:offset  stmt:offset  stmt:offset  stmt:offset  stmt:offset  stmt:offset
+  109:0000aa   110:0000b3 
+
+linked : 1     main 0000BA
+ stmt:Offset  stmt:offset  stmt:offset  stmt:offset  stmt:offset  stmt:offset  stmt:offset  stmt:offset
+   49:0000ba 
+
+ stmt:Offset  stmt:offset  stmt:offset  stmt:offset  stmt:offset  stmt:offset  stmt:offset  stmt:offset
+   59:0000c0    60:0000c9    61:0000d2    62:0000db    63:0000e4    64:0000ec    65:0000f2    70:0000fd 
+   73:00010e    74:000118    75:000120    78:000125    79:00012a    80:000133    83:000138    93:000138 
+
