@@ -1,3 +1,11 @@
 // ##################
 // Structures
 // ##################
+
+// Toggle Structure
+// State - On/Off
+// Value
+// Connection
+var toggle_1[3];
+
+// Connection
